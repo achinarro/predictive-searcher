@@ -31,6 +31,12 @@
       </template>
     </demo-snippet>
   </div>
+
+  <script>
+    document.querySelector('predictive-searcher').addEventListener('sendup-selectedlist', (e) => {
+      console.log(e.detail.value);
+    });
+  </script>
 </body>
 
 </html>
