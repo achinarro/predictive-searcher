@@ -126,7 +126,7 @@
           */
           searchTimeOfDelay: {
             type: Number,
-            value: 1000
+            value: 400
           },
           /**
           * Object to control search timing.
@@ -188,14 +188,15 @@
           this._error = true;
           return;
         }
+        if (this._searchTimeout)
+          clearTimeout(this._searchTimeout);
 
+        let valTemp = val;
         val = val.trim();
         oldVal = (oldVal || '').trim();
-        if (val.length >= this.minNumberCharactersSearch && val !== oldVal) {
-          clearTimeout(this._searchTimeout);
+        if (val.length >= this.minNumberCharactersSearch && (valTemp !== val || val !== oldVal)) {
           this._searchTimeout = setTimeout(() => {
             this._searching = true;
-
             const url = this.urlSearch.replace(/(\{0\})/g, val);
             fetch(url, { method: 'get' })
               .then((resp) => resp.json())
@@ -225,6 +226,7 @@
         } else if (val.length < this.minNumberCharactersSearch) {
           this._error = false;
           this.set('_searchResultList', []);
+          this._searchTimeout = null;
         }
       }
 
