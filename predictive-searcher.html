@@ -53,7 +53,7 @@
       </predictive-searcher-spinner>
 
       <template is="dom-if" if="{{_searchSelectedList.length}}">
-        <paper-button raised class="indigo" on-click="_sendUpSelectedList">Enviar</paper-button>
+        <paper-button raised class="indigo" on-click="_sendUpSelectedList">[[mainButtonText]]</paper-button>
       </template>
     </div>
 
@@ -127,6 +127,13 @@
           searchTimeOfDelay: {
             type: Number,
             value: 400
+          },
+          /**
+          * Main button text label.
+          */
+          mainButtonText: {
+            type: String,
+            value: "Send"
           },
           /**
           * Object to control search timing.
