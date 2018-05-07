@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-  <title>predictive-searcher test</title>
+  <title>predictive-searcher-spinner test</title>
 
   <script src="../bower_components/webcomponentsjs/webcomponents-loader.js"></script>
   <script src="../bower_components/web-component-tester/browser.js"></script>
@@ -15,7 +15,7 @@
 
 <body>
 
-  <test-fixture id="BasicTestFixture">
+  <test-fixture id="SpinnerTestFixture">
     <template>
       <predictive-searcher-spinner></predictive-searcher-spinner>
     </template>
@@ -24,12 +24,43 @@
   <script>
     suite('predictive-searcher-spinner', () => {
 
-      test('instantiating the element with default properties works', () => {
-        const element = fixture('BasicTestFixture');
-        assert.equal(element.prop1, 'predictive-searcher-spinner');
-        const elementShadowRoot = element.shadowRoot;
-        const elementHeader = elementShadowRoot.querySelector('h2');
-        assert.equal(elementHeader.innerHTML, 'Hello predictive-searcher!');
+      //Dependencies
+      test('Should have all required components', function () {
+        const component = fixture('SpinnerTestFixture');
+        const field = component.shadowRoot.querySelector('paper-spinner-lite');
+        assert(field, 'field is neither `null` nor `undefined`');
+      });
+
+      //Properties
+      test('Error property should be a Boolean', function () {
+        let component = fixture('SpinnerTestFixture');
+        assert.typeOf(component.error, 'boolean');
+      });
+
+      test('Active property should be a Boolean', function () {
+        let component = fixture('SpinnerTestFixture');
+        assert.typeOf(component.active, 'boolean');
+      });
+
+      //Funcionality
+      test('Change Error property should add error class to the subcomponent', function (done) {
+        const component = fixture('SpinnerTestFixture');
+        component.error = true;
+        flush(function () {
+          const field = component.shadowRoot.querySelector('paper-spinner-lite');
+          assert.isTrue(field.classList.contains('error'));
+          done();
+        });
+      });
+
+      test('Change Active property should assign its active attibute to true', function (done) {
+        const component = fixture('SpinnerTestFixture');
+        component.active = true;
+        flush(function () {
+          const field = component.shadowRoot.querySelector('paper-spinner-lite');
+          assert.isTrue(field.active);
+          done();
+        });
       });
 
     });

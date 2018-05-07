@@ -15,23 +15,97 @@
 
 <body>
 
-  <test-fixture id="BasicTestFixture">
+  <test-fixture id="LiteInputTestFixture">
     <template>
       <predictive-searcher-input></predictive-searcher-input>
     </template>
   </test-fixture>
 
-
+  <test-fixture id="FullInputTestFixture">
+    <template>
+      <predictive-searcher-input input-label="Search Pattern"></predictive-searcher-input>
+    </template>
+  </test-fixture>
 
   <script>
-    suite('predictive-searcher-result-panel', () => {
+    suite('predictive-searcher-input', () => {
 
-      test('instantiating the element with default properties works', () => {
-        const element = fixture('BasicTestFixture');
-        assert.equal(element.prop1, 'predictive-searcher-result-panel');
-        const elementShadowRoot = element.shadowRoot;
-        const elementHeader = elementShadowRoot.querySelector('h2');
-        assert.equal(elementHeader.innerHTML, 'Hello predictive-searcher!');
+      //Dependencies
+      test('Should have all required components', function () {
+        const component = fixture('LiteInputTestFixture');
+        const field = component.shadowRoot.querySelector('paper-input');
+        assert(field, 'field is neither `null` nor `undefined`');
+      });
+
+      //Properties
+      test('InputLabel property should be a String', function () {
+        let component = fixture('LiteInputTestFixture');
+        assert.typeOf(component.inputLabel, 'string');
+      });
+
+      test('InputValue property should be a String', function () {
+        let component = fixture('LiteInputTestFixture');
+        component.inputValue = '';
+        assert.typeOf(component.inputValue, 'string');
+      });
+
+      test('Error property should be a Boolean', function () {
+        let component = fixture('LiteInputTestFixture');
+        assert.typeOf(component.error, 'boolean');
+      });
+
+      test('ReadOnly property should be a Boolean', function () {
+        let component = fixture('LiteInputTestFixture');
+        assert.typeOf(component.readOnly, 'boolean');
+      });
+
+      //Default values
+      test('Should load a default input label', function (done) {
+        const component = fixture('LiteInputTestFixture');
+        flush(function () {
+          assert.equal(component.inputLabel, 'Insert search pattern');
+          done();
+        });
+      });
+
+      test('Should load a custom input label', function (done) {
+        const component = fixture('FullInputTestFixture');
+        flush(function () {
+          assert.equal(component.inputLabel, 'Search Pattern');
+          done();
+        });
+      });
+
+      //Funcionality
+      test('InputValue property should return user input', function (done) {
+        const component = fixture('FullInputTestFixture');
+        flush(function () {
+          const field = component.shadowRoot.querySelector('paper-input');
+          field.value = 'the test';
+          assert.equal(component.inputValue, 'the test');
+          done();
+        });
+      });
+
+      test('Change Error property should add error class to the subcomponent', function (done) {
+        const component = fixture('FullInputTestFixture');
+        component.error = true;
+        flush(function () {
+          const field = component.shadowRoot.querySelector('paper-input');
+          assert.isTrue(field.classList.contains('error'));
+          done();
+        });
+      });
+
+      test('Change ReadOnly property should add readOnly class to the subcomponent and assign its readonly attibute to true', function (done) {
+        const component = fixture('FullInputTestFixture');
+        component.readOnly = true;
+        flush(function () {
+          const field = component.shadowRoot.querySelector('paper-input');
+          assert.isTrue(field.classList.contains('readOnly'));
+          assert.isTrue(field.readonly);
+          done();
+        });
       });
 
     });
