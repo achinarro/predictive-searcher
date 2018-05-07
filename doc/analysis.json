@@ -1,0 +1,1293 @@
+{
+  "schema_version": "1.0.0",
+  "elements": [
+    {
+      "description": "`predictive-searcher-base` Components Base Class",
+      "summary": "Predictive Seacher Base Class.",
+      "path": "components/predictive-searcher-base.html",
+      "properties": [],
+      "methods": [
+        {
+          "name": "_togglePaperInputClass",
+          "description": "Add / Remove class to an element",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 24,
+              "column": 12
+            },
+            "end": {
+              "line": 30,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "el",
+              "type": "Object",
+              "description": "Element to add/remove class"
+            },
+            {
+              "name": "val",
+              "type": "Boolean",
+              "description": "Value True/False"
+            },
+            {
+              "name": "className",
+              "type": "String",
+              "description": "Class Name"
+            }
+          ]
+        }
+      ],
+      "staticMethods": [],
+      "demos": [],
+      "metadata": {},
+      "sourceRange": {
+        "start": {
+          "line": 12,
+          "column": 8
+        },
+        "end": {
+          "line": 31,
+          "column": 9
+        }
+      },
+      "privacy": "public",
+      "superclass": "HTMLElement",
+      "name": "PredictiveSearcherBase",
+      "attributes": [],
+      "events": [],
+      "styling": {
+        "cssVariables": [],
+        "selectors": []
+      },
+      "slots": [],
+      "tagname": "predictive-searcher-base"
+    },
+    {
+      "description": "`predictive-searcher-base` Components Base Class",
+      "summary": "Predictive Seacher Base Class.",
+      "path": "components/predictive-searcher-base.html",
+      "properties": [],
+      "methods": [],
+      "staticMethods": [],
+      "demos": [],
+      "metadata": {},
+      "sourceRange": {
+        "start": {
+          "line": 12,
+          "column": 46
+        },
+        "end": {
+          "line": 12,
+          "column": 79
+        }
+      },
+      "privacy": "public",
+      "superclass": "HTMLElement",
+      "attributes": [],
+      "events": [],
+      "styling": {
+        "cssVariables": [],
+        "selectors": []
+      },
+      "slots": []
+    },
+    {
+      "description": "`predictive-searcher-input` Shows an input field used to register user seach and send it up.",
+      "summary": "Predictive searcher input.",
+      "path": "components/predictive-searcher-input.html",
+      "properties": [
+        {
+          "name": "error",
+          "type": "boolean",
+          "description": "Error indicator.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 49,
+              "column": 20
+            },
+            "end": {
+              "line": 53,
+              "column": 21
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "observer": "\"_errorChanged\""
+            }
+          },
+          "defaultValue": "false"
+        },
+        {
+          "name": "readOnly",
+          "type": "boolean",
+          "description": "Read Only indicator.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 57,
+              "column": 20
+            },
+            "end": {
+              "line": 61,
+              "column": 21
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "observer": "\"_readOnlyChanged\""
+            }
+          },
+          "defaultValue": "false"
+        },
+        {
+          "name": "inputLabel",
+          "type": "string",
+          "description": "Input label externally defined.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 65,
+              "column": 20
+            },
+            "end": {
+              "line": 68,
+              "column": 21
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "\"Insert search pattern\""
+        },
+        {
+          "name": "inputValue",
+          "type": "string",
+          "description": "Value typed by the user.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 72,
+              "column": 20
+            },
+            "end": {
+              "line": 76,
+              "column": 21
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "notify": true,
+              "observer": "\"_inputChanged\""
+            }
+          }
+        }
+      ],
+      "methods": [
+        {
+          "name": "_inputChanged",
+          "description": "Fired when `inputValue` changes its value.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 85,
+              "column": 12
+            },
+            "end": {
+              "line": 89,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "val",
+              "type": "String",
+              "description": "Value typed."
+            }
+          ]
+        },
+        {
+          "name": "_errorChanged",
+          "description": "Fired when `error` changes its value.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 96,
+              "column": 12
+            },
+            "end": {
+              "line": 98,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "val",
+              "type": "Boolean",
+              "description": "Value changed."
+            }
+          ]
+        },
+        {
+          "name": "_readOnlyChanged",
+          "description": "Fired when `readOnly` changes its value.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 105,
+              "column": 12
+            },
+            "end": {
+              "line": 108,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "val",
+              "type": "Boolean",
+              "description": "Value changed."
+            }
+          ]
+        }
+      ],
+      "staticMethods": [],
+      "demos": [],
+      "metadata": {},
+      "sourceRange": {
+        "start": {
+          "line": 39,
+          "column": 8
+        },
+        "end": {
+          "line": 109,
+          "column": 9
+        }
+      },
+      "privacy": "public",
+      "superclass": "HTMLElement",
+      "name": "PredictiveSearcherInput",
+      "attributes": [
+        {
+          "name": "error",
+          "description": "Error indicator.",
+          "sourceRange": {
+            "start": {
+              "line": 49,
+              "column": 20
+            },
+            "end": {
+              "line": 53,
+              "column": 21
+            }
+          },
+          "metadata": {},
+          "type": "boolean"
+        },
+        {
+          "name": "read-only",
+          "description": "Read Only indicator.",
+          "sourceRange": {
+            "start": {
+              "line": 57,
+              "column": 20
+            },
+            "end": {
+              "line": 61,
+              "column": 21
+            }
+          },
+          "metadata": {},
+          "type": "boolean"
+        },
+        {
+          "name": "input-label",
+          "description": "Input label externally defined.",
+          "sourceRange": {
+            "start": {
+              "line": 65,
+              "column": 20
+            },
+            "end": {
+              "line": 68,
+              "column": 21
+            }
+          },
+          "metadata": {},
+          "type": "string"
+        },
+        {
+          "name": "input-value",
+          "description": "Value typed by the user.",
+          "sourceRange": {
+            "start": {
+              "line": 72,
+              "column": 20
+            },
+            "end": {
+              "line": 76,
+              "column": 21
+            }
+          },
+          "metadata": {},
+          "type": "string"
+        }
+      ],
+      "events": [
+        {
+          "type": "CustomEvent",
+          "name": "input-value-changed",
+          "description": "Fired when the `inputValue` property changes.",
+          "metadata": {}
+        }
+      ],
+      "styling": {
+        "cssVariables": [],
+        "selectors": []
+      },
+      "slots": [],
+      "tagname": "predictive-searcher-input"
+    },
+    {
+      "description": "`predictive-searcher-result-panel` List results from an array of elements",
+      "summary": "List of Result items.",
+      "path": "components/predictive-searcher-result-panel.html",
+      "properties": [
+        {
+          "name": "resultList",
+          "type": "Array",
+          "description": "Array of items to list.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 49,
+              "column": 20
+            },
+            "end": {
+              "line": 49,
+              "column": 37
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          }
+        },
+        {
+          "name": "_selectedItem",
+          "type": "number",
+          "description": "Value selected by the user.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 53,
+              "column": 20
+            },
+            "end": {
+              "line": 56,
+              "column": 21
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "observer": "\"_valueSelected\""
+            }
+          }
+        }
+      ],
+      "methods": [
+        {
+          "name": "_valueSelected",
+          "description": "Fired when `_selectedItem` changes its value, fire `selected-changed` event.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 66,
+              "column": 12
+            },
+            "end": {
+              "line": 71,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "val",
+              "type": "Number",
+              "description": "Value selected."
+            }
+          ]
+        }
+      ],
+      "staticMethods": [],
+      "demos": [],
+      "metadata": {},
+      "sourceRange": {
+        "start": {
+          "line": 39,
+          "column": 8
+        },
+        "end": {
+          "line": 72,
+          "column": 9
+        }
+      },
+      "privacy": "public",
+      "superclass": "HTMLElement",
+      "name": "PredictiveSearcherResultPanel",
+      "attributes": [
+        {
+          "name": "result-list",
+          "description": "Array of items to list.",
+          "sourceRange": {
+            "start": {
+              "line": 49,
+              "column": 20
+            },
+            "end": {
+              "line": 49,
+              "column": 37
+            }
+          },
+          "metadata": {},
+          "type": "Array"
+        }
+      ],
+      "events": [
+        {
+          "type": "CustomEvent",
+          "name": "selected-changed",
+          "description": "selected-changed",
+          "metadata": {}
+        }
+      ],
+      "styling": {
+        "cssVariables": [],
+        "selectors": []
+      },
+      "slots": [],
+      "tagname": "predictive-searcher-result-panel"
+    },
+    {
+      "description": "`predictive-searcher-selected-panel` Show selected elements",
+      "summary": "Panel with Selected Elements.",
+      "path": "components/predictive-searcher-selected-panel.html",
+      "properties": [
+        {
+          "name": "selectedList",
+          "type": "Array",
+          "description": "Array of items to list.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 76,
+              "column": 20
+            },
+            "end": {
+              "line": 76,
+              "column": 39
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          }
+        }
+      ],
+      "methods": [
+        {
+          "name": "_deleteSelectedItem",
+          "description": "Fire `unselected-changed` event.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 86,
+              "column": 12
+            },
+            "end": {
+              "line": 91,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "val",
+              "type": "Object",
+              "description": "Value clicked."
+            }
+          ]
+        }
+      ],
+      "staticMethods": [],
+      "demos": [],
+      "metadata": {},
+      "sourceRange": {
+        "start": {
+          "line": 66,
+          "column": 8
+        },
+        "end": {
+          "line": 92,
+          "column": 9
+        }
+      },
+      "privacy": "public",
+      "superclass": "HTMLElement",
+      "name": "PredictiveSearcherSelectedPanel",
+      "attributes": [
+        {
+          "name": "selected-list",
+          "description": "Array of items to list.",
+          "sourceRange": {
+            "start": {
+              "line": 76,
+              "column": 20
+            },
+            "end": {
+              "line": 76,
+              "column": 39
+            }
+          },
+          "metadata": {},
+          "type": "Array"
+        }
+      ],
+      "events": [
+        {
+          "type": "CustomEvent",
+          "name": "unselected-changed",
+          "description": "unselected-changed",
+          "metadata": {}
+        }
+      ],
+      "styling": {
+        "cssVariables": [],
+        "selectors": []
+      },
+      "slots": [],
+      "tagname": "predictive-searcher-selected-panel"
+    },
+    {
+      "description": "`predictive-searcher-spinner` Custom circular spinner",
+      "summary": "Circular Spinner.",
+      "path": "components/predictive-searcher-spinner.html",
+      "properties": [
+        {
+          "name": "error",
+          "type": "boolean",
+          "description": "Error indicator.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 47,
+              "column": 20
+            },
+            "end": {
+              "line": 51,
+              "column": 21
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "observer": "\"_errorChanged\""
+            }
+          },
+          "defaultValue": "false"
+        },
+        {
+          "name": "active",
+          "type": "boolean",
+          "description": "Active indicator.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 55,
+              "column": 20
+            },
+            "end": {
+              "line": 59,
+              "column": 21
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "observer": "\"_searchingStatus\""
+            }
+          },
+          "defaultValue": "false"
+        }
+      ],
+      "methods": [
+        {
+          "name": "_searchingStatus",
+          "description": "Fired when `active` changes its value.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 68,
+              "column": 12
+            },
+            "end": {
+              "line": 70,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "val",
+              "type": "Boolean",
+              "description": "Value changed."
+            }
+          ]
+        },
+        {
+          "name": "_errorChanged",
+          "description": "Fired when `error` changes its value.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 77,
+              "column": 12
+            },
+            "end": {
+              "line": 79,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "val",
+              "type": "Boolean",
+              "description": "Value changed."
+            }
+          ]
+        }
+      ],
+      "staticMethods": [],
+      "demos": [],
+      "metadata": {},
+      "sourceRange": {
+        "start": {
+          "line": 37,
+          "column": 8
+        },
+        "end": {
+          "line": 80,
+          "column": 9
+        }
+      },
+      "privacy": "public",
+      "superclass": "HTMLElement",
+      "name": "PredictiveSearcherSpinner",
+      "attributes": [
+        {
+          "name": "error",
+          "description": "Error indicator.",
+          "sourceRange": {
+            "start": {
+              "line": 47,
+              "column": 20
+            },
+            "end": {
+              "line": 51,
+              "column": 21
+            }
+          },
+          "metadata": {},
+          "type": "boolean"
+        },
+        {
+          "name": "active",
+          "description": "Active indicator.",
+          "sourceRange": {
+            "start": {
+              "line": 55,
+              "column": 20
+            },
+            "end": {
+              "line": 59,
+              "column": 21
+            }
+          },
+          "metadata": {},
+          "type": "boolean"
+        }
+      ],
+      "events": [],
+      "styling": {
+        "cssVariables": [],
+        "selectors": []
+      },
+      "slots": [],
+      "tagname": "predictive-searcher-spinner"
+    },
+    {
+      "description": "`predictive-searcher`\nA component to search and select items\n\n### Styling\n\n`<predictive-searcher>` provides the following custom properties and mixins\nfor styling:\n\nCustom property | Description | Default\n----------------|-------------|----------\n`--predictive-searcher-color` | Font and border color of the input | #3f87a6\n`--predictive-searcher-error-color` | Font and border color of the input when an error happend | #900\n`--predictive-searcher-selecteditem-bgcolor` | Background color of the selected item | #5c9db9\n`--predictive-searcher-selecteditem-color` | Font color of the selected item | #fff\n`--predictive-searcher-button-bgcolor` | Background color of the main button | #367591\n`--predictive-searcher-button-color` | Font color of the main button | #fff",
+      "summary": "",
+      "path": "predictive-searcher.html",
+      "properties": [
+        {
+          "name": "searcherInputLabel",
+          "type": "string",
+          "description": "Search input placeholder attribute.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 99,
+              "column": 10
+            },
+            "end": {
+              "line": 99,
+              "column": 36
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          }
+        },
+        {
+          "name": "urlSearch",
+          "type": "string",
+          "description": "Url Api Rest (Required). Include '{0}' pattern.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 103,
+              "column": 10
+            },
+            "end": {
+              "line": 103,
+              "column": 27
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          }
+        },
+        {
+          "name": "keyProperty",
+          "type": "string",
+          "description": "Key Property Name of the result object (Required).",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 107,
+              "column": 10
+            },
+            "end": {
+              "line": 107,
+              "column": 29
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          }
+        },
+        {
+          "name": "valueProperty",
+          "type": "string",
+          "description": "Value Property Name of the result object (Required).",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 111,
+              "column": 10
+            },
+            "end": {
+              "line": 111,
+              "column": 31
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          }
+        },
+        {
+          "name": "resultProperty",
+          "type": "string",
+          "description": "Result Property Name of the result object (Required).",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 115,
+              "column": 10
+            },
+            "end": {
+              "line": 115,
+              "column": 32
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          }
+        },
+        {
+          "name": "minNumberCharactersSearch",
+          "type": "number",
+          "description": "Minimun number of characters to start the seach.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 119,
+              "column": 10
+            },
+            "end": {
+              "line": 122,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "2"
+        },
+        {
+          "name": "searchTimeOfDelay",
+          "type": "number",
+          "description": "Number of miliseconds of delay before start searching.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 126,
+              "column": 10
+            },
+            "end": {
+              "line": 129,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "1000"
+        },
+        {
+          "name": "_searchTimeout",
+          "type": "number",
+          "description": "Object to control search timing.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 133,
+              "column": 10
+            },
+            "end": {
+              "line": 135,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          }
+        },
+        {
+          "name": "_inputTypedValue",
+          "type": "string",
+          "description": "Input string typed by the user.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 139,
+              "column": 10
+            },
+            "end": {
+              "line": 142,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "observer": "\"_inputChanged\""
+            }
+          }
+        },
+        {
+          "name": "_searchResultList",
+          "type": "Array",
+          "description": "List of items from the Api response.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 146,
+              "column": 10
+            },
+            "end": {
+              "line": 149,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "[]"
+        },
+        {
+          "name": "_searchSelectedList",
+          "type": "Array",
+          "description": "List of items seleted by the user.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 153,
+              "column": 10
+            },
+            "end": {
+              "line": 156,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "[]"
+        },
+        {
+          "name": "_searching",
+          "type": "boolean",
+          "description": "Searching indicator.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 160,
+              "column": 10
+            },
+            "end": {
+              "line": 164,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "observer": "\"_searchingChanged\""
+            }
+          },
+          "defaultValue": "false"
+        },
+        {
+          "name": "_error",
+          "type": "boolean",
+          "description": "Error indicator.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 168,
+              "column": 10
+            },
+            "end": {
+              "line": 172,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "observer": "\"_errorChanged\""
+            }
+          },
+          "defaultValue": "false"
+        }
+      ],
+      "methods": [
+        {
+          "name": "_inputChanged",
+          "description": "Fired when `_inputTypedValue` changes its value. Fire Api search.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 182,
+              "column": 6
+            },
+            "end": {
+              "line": 228,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "val",
+              "type": "String",
+              "description": "Value typed."
+            },
+            {
+              "name": "oldVal",
+              "type": "String",
+              "description": "Old Value."
+            }
+          ]
+        },
+        {
+          "name": "_searchingChanged",
+          "description": "Fired when `_searching` changes its value.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 235,
+              "column": 6
+            },
+            "end": {
+              "line": 238,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "val",
+              "type": "Boolean",
+              "description": "Value changed."
+            }
+          ]
+        },
+        {
+          "name": "_errorChanged",
+          "description": "Fired when `_error` changes its value.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 245,
+              "column": 6
+            },
+            "end": {
+              "line": 248,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "val",
+              "type": "Boolean",
+              "description": "Value changed."
+            }
+          ]
+        },
+        {
+          "name": "ready",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 250,
+              "column": 6
+            },
+            "end": {
+              "line": 262,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
+          "name": "_sendUpSelectedList",
+          "description": "Fire `sendup-selectedlist` event when main button is pushed.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 269,
+              "column": 6
+            },
+            "end": {
+              "line": 274,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": []
+        }
+      ],
+      "staticMethods": [],
+      "demos": [
+        {
+          "url": "../demo/index.html",
+          "description": ""
+        }
+      ],
+      "metadata": {},
+      "sourceRange": {
+        "start": {
+          "line": 92,
+          "column": 4
+        },
+        "end": {
+          "line": 275,
+          "column": 5
+        }
+      },
+      "privacy": "public",
+      "superclass": "HTMLElement",
+      "name": "PredictiveSearcher",
+      "attributes": [
+        {
+          "name": "searcher-input-label",
+          "description": "Search input placeholder attribute.",
+          "sourceRange": {
+            "start": {
+              "line": 99,
+              "column": 10
+            },
+            "end": {
+              "line": 99,
+              "column": 36
+            }
+          },
+          "metadata": {},
+          "type": "string"
+        },
+        {
+          "name": "url-search",
+          "description": "Url Api Rest (Required). Include '{0}' pattern.",
+          "sourceRange": {
+            "start": {
+              "line": 103,
+              "column": 10
+            },
+            "end": {
+              "line": 103,
+              "column": 27
+            }
+          },
+          "metadata": {},
+          "type": "string"
+        },
+        {
+          "name": "key-property",
+          "description": "Key Property Name of the result object (Required).",
+          "sourceRange": {
+            "start": {
+              "line": 107,
+              "column": 10
+            },
+            "end": {
+              "line": 107,
+              "column": 29
+            }
+          },
+          "metadata": {},
+          "type": "string"
+        },
+        {
+          "name": "value-property",
+          "description": "Value Property Name of the result object (Required).",
+          "sourceRange": {
+            "start": {
+              "line": 111,
+              "column": 10
+            },
+            "end": {
+              "line": 111,
+              "column": 31
+            }
+          },
+          "metadata": {},
+          "type": "string"
+        },
+        {
+          "name": "result-property",
+          "description": "Result Property Name of the result object (Required).",
+          "sourceRange": {
+            "start": {
+              "line": 115,
+              "column": 10
+            },
+            "end": {
+              "line": 115,
+              "column": 32
+            }
+          },
+          "metadata": {},
+          "type": "string"
+        },
+        {
+          "name": "min-number-characters-search",
+          "description": "Minimun number of characters to start the seach.",
+          "sourceRange": {
+            "start": {
+              "line": 119,
+              "column": 10
+            },
+            "end": {
+              "line": 122,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "number"
+        },
+        {
+          "name": "search-time-of-delay",
+          "description": "Number of miliseconds of delay before start searching.",
+          "sourceRange": {
+            "start": {
+              "line": 126,
+              "column": 10
+            },
+            "end": {
+              "line": 129,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "number"
+        }
+      ],
+      "events": [
+        {
+          "type": "CustomEvent",
+          "name": "sendup-selectedlist",
+          "description": "sendup-selectedlist",
+          "metadata": {}
+        }
+      ],
+      "styling": {
+        "cssVariables": [],
+        "selectors": []
+      },
+      "slots": [],
+      "tagname": "predictive-searcher"
+    },
+    {
+      "description": "`predictive-searcher`\nA component to search and select items\n\n### Styling\n\n`<predictive-searcher>` provides the following custom properties and mixins\nfor styling:\n\nCustom property | Description | Default\n----------------|-------------|----------\n`--predictive-searcher-color` | Font and border color of the input | #3f87a6\n`--predictive-searcher-error-color` | Font and border color of the input when an error happend | #900\n`--predictive-searcher-selecteditem-bgcolor` | Background color of the selected item | #5c9db9\n`--predictive-searcher-selecteditem-color` | Font color of the selected item | #fff\n`--predictive-searcher-button-bgcolor` | Background color of the main button | #367591\n`--predictive-searcher-button-color` | Font color of the main button | #fff",
+      "summary": "",
+      "path": "predictive-searcher.html",
+      "properties": [],
+      "methods": [],
+      "staticMethods": [],
+      "demos": [
+        {
+          "url": "../demo/index.html",
+          "description": ""
+        }
+      ],
+      "metadata": {},
+      "sourceRange": {
+        "start": {
+          "line": 92,
+          "column": 38
+        },
+        "end": {
+          "line": 92,
+          "column": 71
+        }
+      },
+      "privacy": "public",
+      "superclass": "HTMLElement",
+      "attributes": [],
+      "events": [],
+      "styling": {
+        "cssVariables": [],
+        "selectors": []
+      },
+      "slots": []
+    }
+  ]
+}
