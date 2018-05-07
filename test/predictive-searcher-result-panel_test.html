@@ -10,42 +10,28 @@
   <script src="../bower_components/webcomponentsjs/webcomponents-loader.js"></script>
   <script src="../bower_components/web-component-tester/browser.js"></script>
 
-  <link rel="import" href="../predictive-searcher.html">
+  <link rel="import" href="../components/predictive-searcher-result-panel.html">
 </head>
 
 <body>
 
   <test-fixture id="BasicTestFixture">
     <template>
-      <predictive-searcher></predictive-searcher>
-    </template>
-  </test-fixture>
-
-  <test-fixture id="ChangedPropertyTestFixture">
-    <template>
-      <predictive-searcher prop1="new-prop1"></predictive-searcher>
+      <predictive-searcher-result-panel></predictive-searcher-result-panel>
     </template>
   </test-fixture>
 
   <script>
-    suite('predictive-searcher', () => {
+    suite('predictive-searcher-result-panel', () => {
 
       test('instantiating the element with default properties works', () => {
         const element = fixture('BasicTestFixture');
-        assert.equal(element.prop1, 'predictive-searcher');
+        assert.equal(element.prop1, 'predictive-searcher-result-panel');
         const elementShadowRoot = element.shadowRoot;
         const elementHeader = elementShadowRoot.querySelector('h2');
         assert.equal(elementHeader.innerHTML, 'Hello predictive-searcher!');
       });
 
-      test('setting a property on the element works', () => {
-        // Create a test fixture
-        const element = fixture('ChangedPropertyTestFixture');
-        assert.equal(element.prop1, 'new-prop1');
-        const elementShadowRoot = element.shadowRoot;
-        const elementHeader = elementShadowRoot.querySelector('h2');
-        assert.equal(elementHeader.innerHTML, 'Hello new-prop1!');
-      });
 
     });
   </script>
