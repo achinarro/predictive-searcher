@@ -1,0 +1,114 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="predictive-searcher-base.html">
+
+<dom-module id="predictive-searcher-input">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+
+            paper-input {
+                --primary-text-color: var(--predictive-searcher-color, #3f87a6);
+                --paper-input-container-focus-color: var(--predictive-searcher-color, #3f87a6);
+            }
+
+            paper-input.error {
+                --primary-text-color: var(--predictive-searcher-error-color, #900);
+                --paper-input-container-focus-color: var(--predictive-searcher-error-color, #900);
+            }
+
+            paper-input.readOnly {
+                --primary-text-color: var(--paper-input-container-color, var(--secondary-text-color));
+            }
+        </style>
+
+        <paper-input id="paperInput" label="[[inputLabel]]"
+            type="search" value="{{inputValue}}"></paper-input>
+    </template>
+
+    <script>
+        /**
+         * `predictive-searcher-input` Shows an input field used to register user seach and send it up.
+         *
+         * @summary Predictive searcher input.
+         * @customElement
+         * @polymer
+         * @extends {PredictiveSearcherBase}
+         */
+        class PredictiveSearcherInput extends PredictiveSearcherBase {
+            static get is() {
+                return 'predictive-searcher-input';
+            }
+
+            static get properties() {
+                return {
+                    /**
+                    * Error indicator.
+                    */
+                    error: {
+                        type: Boolean,
+                        value: false,
+                        observer: '_errorChanged'
+                    },
+                    /**
+                    * Read Only indicator.
+                    */
+                    readOnly: {
+                        type: Boolean,
+                        value: false,
+                        observer: '_readOnlyChanged'
+                    },
+                    /**
+                    * Input label externally defined.
+                    */
+                    inputLabel: {
+                        type: String,
+                        value: 'Insert search pattern'
+                    },
+                    /**
+                    * Value typed by the user.
+                    */
+                    inputValue: {
+                        type: String,
+                        observer: '_inputChanged',
+                        notify: true
+                    }
+                };
+            }
+
+            /**
+            * Fired when `inputValue` changes its value.
+            *
+            * @param {String} val Value typed.
+            */
+            _inputChanged(val) {
+                if (val.trim() === '' && !this.$.paperInput.focused) {
+                    this.$.paperInput.focus();
+                }
+            }
+
+            /**
+            * Fired when `error` changes its value.
+            *
+            * @param {Boolean} val Value changed.
+            */
+            _errorChanged(val) {
+                this._togglePaperInputClass(this.$.paperInput, val, 'error');
+            }
+
+            /**
+            * Fired when `readOnly` changes its value.
+            *
+            * @param {Boolean} val Value changed.
+            */
+            _readOnlyChanged(val) {
+                this.$.paperInput.readonly = val;
+                this._togglePaperInputClass(this.$.paperInput, val, 'readOnly');
+            }
+        }
+
+        window.customElements.define(PredictiveSearcherInput.is, PredictiveSearcherInput);
+    </script>
+</dom-module>

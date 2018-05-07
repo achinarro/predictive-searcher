@@ -1,0 +1,281 @@
+<link rel="import" href="bower_components/polymer/polymer-element.html">
+<link rel="import" href="bower_components/paper-button/paper-button.html">
+<link rel="import" href="components/predictive-searcher-input.html">
+<link rel="import" href="components/predictive-searcher-result-panel.html">
+<link rel="import" href="components/predictive-searcher-selected-panel.html">
+<link rel="import" href="components/predictive-searcher-spinner.html">
+
+<dom-module id="predictive-searcher">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      .inlineElements {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      predictive-searcher-input {
+        flex-grow: 1;
+        margin-bottom: 10px;
+      }
+
+      predictive-searcher-input,
+      predictive-searcher-spinner {
+        margin-right: .5em;
+      }
+
+      predictive-searcher-result-panel {
+        margin-top: -10px;
+        margin-bottom: 5px;
+        max-height: 340px;
+        overflow: hidden;
+        overflow-y: auto;
+      }
+
+      paper-button {
+        background-color: var(--predictive-searcher-button-bgcolor, #367591);
+        color: var(--predictive-searcher-button-color, #fff);
+      }
+    </style>
+
+    <div class="inlineElements">
+      <predictive-searcher-input id="searcherInput"
+        input-value="{{_inputTypedValue}}"
+        input-label="[[searcherInputLabel]]">
+      </predictive-searcher-input>
+
+      <predictive-searcher-spinner id="searcherSpinner">
+      </predictive-searcher-spinner>
+
+      <template is="dom-if" if="{{_searchSelectedList.length}}">
+        <paper-button raised class="indigo" on-click="_sendUpSelectedList">Enviar</paper-button>
+      </template>
+    </div>
+
+    <predictive-searcher-result-panel id="resultPanel"
+      result-list="[[_searchResultList]]">
+    </predictive-searcher-result-panel>
+
+    <predictive-searcher-selected-panel id="selectedPanel"
+      selected-list="[[_searchSelectedList]]"></predictive-searcher-selected-panel>
+
+  </template>
+
+  <script>
+    /**
+     * `predictive-searcher`
+     * A component to search and select items
+     *
+     *### Styling
+     *
+     *`<predictive-searcher>` provides the following custom properties and mixins
+     *for styling:
+     *
+     *Custom property | Description | Default
+     *----------------|-------------|----------
+     *`--predictive-searcher-color` | Font and border color of the input | #3f87a6
+     *`--predictive-searcher-error-color` | Font and border color of the input when an error happend | #900
+     *`--predictive-searcher-selecteditem-bgcolor` | Background color of the selected item | #5c9db9
+     *`--predictive-searcher-selecteditem-color` | Font color of the selected item | #fff
+     *`--predictive-searcher-button-bgcolor` | Background color of the main button | #367591
+     *`--predictive-searcher-button-color` | Font color of the main button | #fff
+     *
+     * @customElement
+     * @polymer
+     * @extends {Polymer.Element}
+     * @demo ../demo/index.html
+     */
+    class PredictiveSearcher extends (class extends Polymer.Element { }) {
+      static get is() { return 'predictive-searcher'; }
+      static get properties() {
+        return {
+          /**
+          * Search input placeholder attribute.
+          */
+          searcherInputLabel: String,
+          /**
+          * Url Api Rest (Required). Include '{0}' pattern.
+          */
+          urlSearch: String,
+          /**
+          * Key Property Name of the result object (Required).
+          */
+          keyProperty: String,
+          /**
+          * Value Property Name of the result object (Required).
+          */
+          valueProperty: String,
+          /**
+          * Result Property Name of the result object (Required).
+          */
+          resultProperty: String,
+          /**
+          * Minimun number of characters to start the seach.
+          */
+          minNumberCharactersSearch: {
+            type: Number,
+            value: 2
+          },
+          /**
+          * Number of miliseconds of delay before start searching.
+          */
+          searchTimeOfDelay: {
+            type: Number,
+            value: 1000
+          },
+          /**
+          * Object to control search timing.
+          */
+          _searchTimeout: {
+            type: Number
+          },
+          /**
+          * Input string typed by the user.
+          */
+          _inputTypedValue: {
+            type: String,
+            observer: '_inputChanged'
+          },
+          /**
+          * List of items from the Api response.
+          */
+          _searchResultList: {
+            type: Array,
+            value: () => []
+          },
+          /**
+          * List of items seleted by the user.
+          */
+          _searchSelectedList: {
+            type: Array,
+            value: () => []
+          },
+          /**
+          * Searching indicator.
+          */
+          _searching: {
+            type: Boolean,
+            value: false,
+            observer: '_searchingChanged'
+          },
+          /**
+          * Error indicator.
+          */
+          _error: {
+            type: Boolean,
+            value: false,
+            observer: '_errorChanged'
+          }
+        };
+      }
+
+      /**
+        * Fired when `_inputTypedValue` changes its value. Fire Api search.
+        *
+        * @param {String} val Value typed.
+        * @param {String} oldVal Old Value.
+        */
+      _inputChanged(val, oldVal) {
+        if (typeof this.urlSearch === 'undefined'
+          || typeof this.keyProperty === 'undefined'
+          || typeof this.valueProperty === 'undefined'
+          || typeof this.resultProperty === 'undefined') {
+          this._error = true;
+          return;
+        }
+
+        val = val.trim();
+        oldVal = (oldVal || '').trim();
+        if (val.length >= this.minNumberCharactersSearch && val !== oldVal) {
+          clearTimeout(this._searchTimeout);
+          this._searchTimeout = setTimeout(() => {
+            this._searching = true;
+
+            const url = this.urlSearch.replace(/(\{0\})/g, val);
+            fetch(url, { method: 'get' })
+              .then((resp) => resp.json())
+              .then((resp) => {
+                if (resp.hasOwnProperty(this.resultProperty) &&
+                  resp[this.resultProperty].length > 0) {
+                  let tempArray = [];
+                  resp[this.resultProperty].forEach((el) => {
+                    tempArray.push({ key: el[this.keyProperty], value: el[this.valueProperty] });
+                  });
+                  this._error = false;
+                  this.set('_searchResultList', tempArray);
+                } else {
+                  this._error = true;
+                  this.set('_searchResultList', []);
+                }
+                this._searching = false;
+              })
+              .catch((e) => {
+                if (e.code !== 20) {
+                  this._error = true;
+                }
+                this.set('_searchResultList', []);
+                this._searching = false;
+              });
+          }, this.searchTimeOfDelay);
+        } else if (val.length < this.minNumberCharactersSearch) {
+          this._error = false;
+          this.set('_searchResultList', []);
+        }
+      }
+
+      /**
+      * Fired when `_searching` changes its value.
+      *
+      * @param {Boolean} val Value changed.
+      */
+      _searchingChanged(val) {
+        this.$.searcherSpinner.active = val;
+        this.$.searcherInput.readOnly = val;
+      }
+
+      /**
+      * Fired when `_error` changes its value.
+      *
+      * @param {Boolean} val Value changed.
+      */
+      _errorChanged(val) {
+        this.$.searcherInput.error = val;
+        this.$.searcherSpinner.error = val;
+      }
+
+      ready() {
+        super.ready();
+
+        this.$.resultPanel.addEventListener('selected-changed', (e) => {
+          this.push('_searchSelectedList', this._searchResultList[e.detail.value]);
+          this.$.searcherInput.inputValue = '';
+          this.set('_searchResultList', []);
+        });
+
+        this.$.selectedPanel.addEventListener('item-unselected', (e) => {
+          this.splice('_searchSelectedList', e.detail.value, 1);
+        });
+      }
+
+      /**
+       * Fire `sendup-selectedlist` event when main button is pushed.
+       *
+       * @event sendup-selectedlist
+       */
+      _sendUpSelectedList() {
+        if (this._searchSelectedList.length > 0) {
+          this.dispatchEvent(new CustomEvent('sendup-selectedlist',
+            { detail: { value: this._searchSelectedList } }));
+          this.set('_searchSelectedList', []);
+        }
+      }
+    }
+
+    window.customElements.define(PredictiveSearcher.is, PredictiveSearcher);
+  </script>
+</dom-module>

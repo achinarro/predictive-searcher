@@ -1,0 +1,98 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-badge/paper-badge.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+
+<dom-module id="predictive-searcher-selected-panel">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+
+            div.selectedPanel {
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: space-between;
+                margin-left: -2px;
+            }
+
+            div.item {
+                flex: 1 1 auto;
+                background-color: var(--predictive-searcher-selecteditem-bgcolor, #5c9db9);
+                color: var(--predictive-searcher-selecteditem-color, #fff);
+                padding: 5px 10px;
+                border-radius: 8px;
+                font-size: .8em;
+                margin: 2px;
+                display: flex;
+                flex-flow: row nowrap;
+                align-items: center;
+            }
+
+            div.item span {
+                flex: 1;
+            }
+
+            div.item iron-icon {
+                margin-left: 10px;
+                opacity: .3;
+            }
+
+            div.item iron-icon:hover {
+                cursor: pointer;
+            }
+        </style>
+
+        <div class="selectedPanel">
+            <template is="dom-repeat" items="[[selectedList]]"
+                as="result">
+                <div class="item">
+                    <span>[[result.value]]</span>
+                    <iron-icon id="[[result.key]]" icon="icons:cancel"
+                        on-click="_deleteSelectedItem"></iron-icon>
+                </div>
+            </template>
+        </div>
+    </template>
+
+    <script>
+        /**
+         * `predictive-searcher-selected-panel` Show selected elements
+         *
+         * @summary Panel with Selected Elements.
+         * @customElement
+         * @polymer
+         * @extends {PredictiveSearcherBase}
+         */
+        class PredictiveSearcherSelectedPanel extends PredictiveSearcherBase {
+            static get is() {
+                return 'predictive-searcher-selected-panel';
+            }
+
+            static get properties() {
+                return {
+                    /**
+                    * Array of items to list.
+                    */
+                    selectedList: Array
+                };
+            }
+
+            /**
+             * Fire `unselected-changed` event.
+             *
+             * @event unselected-changed
+             * @param {Object} val Value clicked.
+             */
+            _deleteSelectedItem(val) {
+                if (val !== null) {
+                    let itemIndex = this.selectedList.findIndex((el) => el.key === val.path[0].id);
+                    this.dispatchEvent(new CustomEvent('item-unselected',
+                        { detail: { value: itemIndex } }));
+                }
+            }
+        }
+
+        window.customElements.define(PredictiveSearcherSelectedPanel.is, PredictiveSearcherSelectedPanel);
+    </script>
+</dom-module>

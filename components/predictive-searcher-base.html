@@ -1,0 +1,36 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="predictive-searcher-base">
+    <script>
+        /**
+         * `predictive-searcher-base` Components Base Class
+         *
+         * @summary Predictive Seacher Base Class.
+         * @customElement
+         * @polymer
+         * @extends {Polymer.Element}
+         */
+        class PredictiveSearcherBase extends (class extends Polymer.Element { }) {
+            static get is() {
+                return 'predictive-searcher-base';
+            }
+
+            /**
+            * Add / Remove class to an element
+            *
+            * @param {Object} el Element to add/remove class
+            * @param {Boolean} val Value True/False
+            * @param {String} className Class Name
+            */
+            _togglePaperInputClass(el, val, className) {
+                if (val) {
+                    el.classList.add(className);
+                } else {
+                    el.classList.remove(className);
+                }
+            }
+        }
+
+        window.customElements.define(PredictiveSearcherBase.is, PredictiveSearcherBase);
+    </script>
+</dom-module>

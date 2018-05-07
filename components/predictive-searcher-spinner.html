@@ -1,0 +1,85 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-spinner/paper-spinner-lite.html">
+<link rel="import" href="predictive-searcher-base.html">
+
+<dom-module id="predictive-searcher-spinner">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+
+            paper-spinner-lite {
+                display: none;
+            }
+
+            paper-spinner-lite[active] {
+                display: block;
+                --paper-spinner-color: var(--predictive-searcher-color, #3f87a6);
+            }
+
+            paper-spinner-lite.error {
+                --paper-spinner-color: var(--predictive-searcher-error-color, #900);
+            }
+        </style>
+
+        <paper-spinner-lite id="searchSpinner"></paper-spinner-lite>
+    </template>
+
+    <script>
+        /**
+         * `predictive-searcher-spinner` Custom circular spinner
+         *
+         * @summary Circular Spinner.
+         * @customElement
+         * @polymer
+         * @extends {PredictiveSearcherBase}
+         */
+        class PredictiveSearcherSpinner extends PredictiveSearcherBase {
+            static get is() {
+                return 'predictive-searcher-spinner';
+            }
+
+            static get properties() {
+                return {
+                    /**
+                    * Error indicator.
+                    */
+                    error: {
+                        type: Boolean,
+                        value: false,
+                        observer: '_errorChanged'
+                    },
+                    /**
+                    * Active indicator.
+                    */
+                    active: {
+                        type: Boolean,
+                        value: false,
+                        observer: '_searchingStatus'
+                    }
+                };
+            }
+
+            /**
+            * Fired when `active` changes its value.
+            *
+            * @param {Boolean} val Value changed.
+            */
+            _searchingStatus(val) {
+                this.$.searchSpinner.active = val;
+            }
+
+            /**
+            * Fired when `error` changes its value.
+            *
+            * @param {Boolean} val Value changed.
+            */
+            _errorChanged(val) {
+                this._togglePaperInputClass(this.$.searchSpinner, val, 'error');
+            }
+        }
+
+        window.customElements.define(PredictiveSearcherSpinner.is, PredictiveSearcherSpinner);
+    </script>
+</dom-module>
