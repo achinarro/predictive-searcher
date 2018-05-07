@@ -261,9 +261,10 @@
         super.ready();
 
         this.$.resultPanel.addEventListener('selected-changed', (e) => {
-          this.push('_searchSelectedList', this._searchResultList[e.detail.value]);
-          this.$.searcherInput.inputValue = '';
-          this.set('_searchResultList', []);
+          let element = this._searchResultList[e.detail.value];
+          if (!this._searchSelectedList.includes(element)) {
+            this.push('_searchSelectedList', element);
+          }
         });
 
         this.$.selectedPanel.addEventListener('item-unselected', (e) => {
