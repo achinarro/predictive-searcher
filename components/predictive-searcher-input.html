@@ -84,8 +84,9 @@
             * @param {String} val Value typed.
             */
             _inputChanged(val) {
-                if (val.trim() === '' && !this.$.paperInput.focused) {
-                    this.$.paperInput.focus();
+                let pinput = this.shadowRoot.querySelector('#paperInput');
+                if (val.trim() === '' && !pinput.focused) {
+                    pinput.focus();
                 }
             }
 
@@ -95,7 +96,8 @@
             * @param {Boolean} val Value changed.
             */
             _errorChanged(val) {
-                this._togglePaperInputClass(this.$.paperInput, val, 'error');
+                this._togglePaperInputClass(
+                    this.shadowRoot.querySelector('#paperInput'), val, 'error');
             }
 
             /**
@@ -104,8 +106,9 @@
             * @param {Boolean} val Value changed.
             */
             _readOnlyChanged(val) {
-                this.$.paperInput.readonly = val;
-                this._togglePaperInputClass(this.$.paperInput, val, 'readOnly');
+                let pinput = this.shadowRoot.querySelector('#paperInput');
+                pinput.readonly = val;
+                this._togglePaperInputClass(pinput, val, 'readOnly');
             }
         }
 

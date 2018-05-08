@@ -67,7 +67,7 @@
             * @param {Boolean} val Value changed.
             */
             _searchingStatus(val) {
-                this.$.searchSpinner.active = val;
+                this.shadowRoot.querySelector('#searchSpinner').active = val;
             }
 
             /**
@@ -76,7 +76,8 @@
             * @param {Boolean} val Value changed.
             */
             _errorChanged(val) {
-                this._togglePaperInputClass(this.$.searchSpinner, val, 'error');
+                this._togglePaperInputClass(
+                    this.shadowRoot.querySelector('#searchSpinner'), val, 'error');
             }
         }
 

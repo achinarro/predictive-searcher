@@ -243,8 +243,8 @@
       * @param {Boolean} val Value changed.
       */
       _searchingChanged(val) {
-        this.$.searcherSpinner.active = val;
-        this.$.searcherInput.readOnly = val;
+        this.shadowRoot.querySelector('#searcherInput').readOnly = val;
+        this.shadowRoot.querySelector('#searcherSpinner').active = val;
       }
 
       /**
@@ -253,23 +253,41 @@
       * @param {Boolean} val Value changed.
       */
       _errorChanged(val) {
-        this.$.searcherInput.error = val;
-        this.$.searcherSpinner.error = val;
+        this.shadowRoot.querySelector('#searcherInput').error = val;
+        this.shadowRoot.querySelector('#searcherSpinner').error = val;
       }
 
       ready() {
         super.ready();
 
-        this.$.resultPanel.addEventListener('selected-changed', (e) => {
-          let element = this._searchResultList[e.detail.value];
-          if (!this._searchSelectedList.includes(element)) {
-            this.push('_searchSelectedList', element);
-          }
-        });
+        this.shadowRoot.querySelector('#resultPanel')
+          .addEventListener('selected-changed',
+            this._selectedChangedEvent.bind(this));
 
-        this.$.selectedPanel.addEventListener('item-unselected', (e) => {
-          this.splice('_searchSelectedList', e.detail.value, 1);
-        });
+        this.shadowRoot.querySelector('#selectedPanel')
+          .addEventListener('item-unselected',
+            this._unseletedChangeEvent.bind(this));
+      }
+
+      /**
+      * Execute when `selected-changed` is fired.
+      *
+      * @param {Object} e Event data.
+      */
+      _selectedChangedEvent(e) {
+        let element = this._searchResultList[e.detail.value];
+        if (!this._searchSelectedList.includes(element)) {
+          this.push('_searchSelectedList', element);
+        }
+      }
+
+      /**
+      * Execute when `item-unselected` is fired.
+      *
+      * @param {Object} e Event data.
+      */
+      _unseletedChangeEvent(e) {
+        this.splice('_searchSelectedList', e.detail.value, 1);
       }
 
       /**

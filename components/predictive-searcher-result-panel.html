@@ -67,7 +67,7 @@
             _valueSelected(val) {
                 if (val !== null) {
                     this.dispatchEvent(new CustomEvent('selected-changed', { detail: { value: val } }));
-                    this.$.paperlist.selected = null;
+                    this.shadowRoot.querySelector('#paperlist').selected = null;
                 }
             }
         }
