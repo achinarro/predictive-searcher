@@ -3,75 +3,75 @@
 <link rel="import" href="../bower_components/paper-item/paper-item.html">
 
 <dom-module id="predictive-searcher-result-panel">
-    <template>
-        <style>
-            :host {
-                display: block;
-                --paper-item-min-height: 32px;
-            }
+  <template>
+    <style>
+      :host {
+        display: block;
+        --paper-item-min-height: 32px;
+      }
 
-            paper-listbox,
-            paper-listbox paper-item {
-                padding: 0;
-            }
+      paper-listbox,
+      paper-listbox paper-item {
+        padding: 0;
+      }
 
-            paper-listbox paper-item:hover {
-                cursor: pointer;
-            }
-        </style>
+      paper-listbox paper-item:hover {
+        cursor: pointer;
+      }
+    </style>
 
-        <paper-listbox id="paperlist" selected="{{_selectedItem}}">
-            <template is="dom-repeat" items="[[resultList]]"
-                as="result">
-                <paper-item>[[result.value]]</paper-item>
-            </template>
-        </paper-listbox>
-    </template>
+    <paper-listbox id="paperlist" selected="{{_selectedItem}}">
+      <template is="dom-repeat" items="[[resultList]]"
+        as="result">
+        <paper-item>[[result.value]]</paper-item>
+      </template>
+    </paper-listbox>
+  </template>
 
-    <script>
-        /**
-         * `predictive-searcher-result-panel` List results from an array of elements
-         *
-         * @summary List of Result items.
-         * @customElement
-         * @polymer
-         * @extends {PredictiveSearcherBase}
-         */
-        class PredictiveSearcherResultPanel extends PredictiveSearcherBase {
-            static get is() {
-                return 'predictive-searcher-result-panel';
-            }
+  <script>
+    /**
+     * `predictive-searcher-result-panel` List results from an array of elements
+     *
+     * @summary List of Result items.
+     * @customElement
+     * @polymer
+     * @extends {BaseClassMixin}
+     */
+    class PredictiveSearcherResultPanel extends BaseClassMixin(Polymer.Element) {
+      static get is() {
+        return 'predictive-searcher-result-panel';
+      }
 
-            static get properties() {
-                return {
-                    /**
-                    * Array of items to list.
-                    */
-                    resultList: Array,
-                    /**
-                    * Value selected by the user.
-                    */
-                    _selectedItem: {
-                        type: Number,
-                        observer: '_valueSelected'
-                    }
-                };
-            }
+      static get properties() {
+        return {
+          /**
+          * Array of items to list.
+          */
+          resultList: Array,
+          /**
+          * Value selected by the user.
+          */
+          _selectedItem: {
+            type: Number,
+            observer: '_valueSelected'
+          }
+        };
+      }
 
-            /**
-            * Fired when `_selectedItem` changes its value, fire `selected-changed` event.
-            *
-            * @event selected-changed
-            * @param {Number} val Value selected.
-            */
-            _valueSelected(val) {
-                if (val !== null) {
-                    this.dispatchEvent(new CustomEvent('selected-changed', { detail: { value: val } }));
-                    this.shadowRoot.querySelector('#paperlist').selected = null;
-                }
-            }
+      /**
+      * Fired when `_selectedItem` changes its value, fire `selected-changed` event.
+      *
+      * @event selected-changed
+      * @param {Number} val Value selected.
+      */
+      _valueSelected(val) {
+        if (val !== null) {
+          this.dispatchEvent(new CustomEvent('selected-changed', { detail: { value: val } }));
+          this.shadowRoot.querySelector('#paperlist').selected = null;
         }
+      }
+    }
 
-        window.customElements.define(PredictiveSearcherResultPanel.is, PredictiveSearcherResultPanel);
-    </script>
+    window.customElements.define(PredictiveSearcherResultPanel.is, PredictiveSearcherResultPanel);
+  </script>
 </dom-module>

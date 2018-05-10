@@ -3,115 +3,115 @@
 <link rel="import" href="predictive-searcher-base.html">
 
 <dom-module id="predictive-searcher-input">
-    <template>
-        <style>
-            :host {
-                display: block;
-            }
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
 
-            paper-input {
-                --primary-text-color: var(--predictive-searcher-color, #3f87a6);
-                --paper-input-container-focus-color: var(--predictive-searcher-color, #3f87a6);
-            }
+      paper-input {
+        --primary-text-color: var(--predictive-searcher-color, #3f87a6);
+        --paper-input-container-focus-color: var(--predictive-searcher-color, #3f87a6);
+      }
 
-            paper-input.error {
-                --primary-text-color: var(--predictive-searcher-error-color, #900);
-                --paper-input-container-focus-color: var(--predictive-searcher-error-color, #900);
-            }
+      paper-input.error {
+        --primary-text-color: var(--predictive-searcher-error-color, #900);
+        --paper-input-container-focus-color: var(--predictive-searcher-error-color, #900);
+      }
 
-            paper-input.readOnly {
-                --primary-text-color: var(--paper-input-container-color, var(--secondary-text-color));
-            }
-        </style>
+      paper-input.readOnly {
+        --primary-text-color: var(--paper-input-container-color, var(--secondary-text-color));
+      }
+    </style>
 
-        <paper-input id="paperInput" label="[[inputLabel]]"
-            type="search" value="{{inputValue}}"></paper-input>
-    </template>
+    <paper-input id="paperInput" label="[[inputLabel]]"
+      type="search" value="{{inputValue}}"></paper-input>
+  </template>
 
-    <script>
-        /**
-         * `predictive-searcher-input` Shows an input field used to register user seach and send it up.
-         *
-         * @summary Predictive searcher input.
-         * @customElement
-         * @polymer
-         * @extends {PredictiveSearcherBase}
-         */
-        class PredictiveSearcherInput extends PredictiveSearcherBase {
-            static get is() {
-                return 'predictive-searcher-input';
-            }
+  <script>
+    /**
+     * `predictive-searcher-input` Shows an input field used to register user seach and send it up.
+     *
+     * @summary Predictive searcher input.
+     * @customElement
+     * @polymer
+     * @extends {BaseClassMixin}
+     */
+    class PredictiveSearcherInput extends BaseClassMixin(Polymer.Element) {
+      static get is() {
+        return 'predictive-searcher-input';
+      }
 
-            static get properties() {
-                return {
-                    /**
-                    * Error indicator.
-                    */
-                    error: {
-                        type: Boolean,
-                        value: false,
-                        observer: '_errorChanged'
-                    },
-                    /**
-                    * Read Only indicator.
-                    */
-                    readOnly: {
-                        type: Boolean,
-                        value: false,
-                        observer: '_readOnlyChanged'
-                    },
-                    /**
-                    * Input label externally defined.
-                    */
-                    inputLabel: {
-                        type: String,
-                        value: 'Insert search pattern'
-                    },
-                    /**
-                    * Value typed by the user.
-                    */
-                    inputValue: {
-                        type: String,
-                        observer: '_inputChanged',
-                        notify: true
-                    }
-                };
-            }
+      static get properties() {
+        return {
+          /**
+          * Error indicator.
+          */
+          error: {
+            type: Boolean,
+            value: false,
+            observer: '_errorChanged'
+          },
+          /**
+          * Read Only indicator.
+          */
+          readOnly: {
+            type: Boolean,
+            value: false,
+            observer: '_readOnlyChanged'
+          },
+          /**
+          * Input label externally defined.
+          */
+          inputLabel: {
+            type: String,
+            value: 'Insert search pattern'
+          },
+          /**
+          * Value typed by the user.
+          */
+          inputValue: {
+            type: String,
+            observer: '_inputChanged',
+            notify: true
+          }
+        };
+      }
 
-            /**
-            * Fired when `inputValue` changes its value.
-            *
-            * @param {String} val Value typed.
-            */
-            _inputChanged(val) {
-                let pinput = this.shadowRoot.querySelector('#paperInput');
-                if (val.trim() === '' && !pinput.focused) {
-                    pinput.focus();
-                }
-            }
-
-            /**
-            * Fired when `error` changes its value.
-            *
-            * @param {Boolean} val Value changed.
-            */
-            _errorChanged(val) {
-                this._togglePaperInputClass(
-                    this.shadowRoot.querySelector('#paperInput'), val, 'error');
-            }
-
-            /**
-            * Fired when `readOnly` changes its value.
-            *
-            * @param {Boolean} val Value changed.
-            */
-            _readOnlyChanged(val) {
-                let pinput = this.shadowRoot.querySelector('#paperInput');
-                pinput.readonly = val;
-                this._togglePaperInputClass(pinput, val, 'readOnly');
-            }
+      /**
+      * Fired when `inputValue` changes its value.
+      *
+      * @param {String} val Value typed.
+      */
+      _inputChanged(val) {
+        let pinput = this.shadowRoot.querySelector('#paperInput');
+        if (val.trim() === '' && !pinput.focused) {
+          pinput.focus();
         }
+      }
 
-        window.customElements.define(PredictiveSearcherInput.is, PredictiveSearcherInput);
-    </script>
+      /**
+      * Fired when `error` changes its value.
+      *
+      * @param {Boolean} val Value changed.
+      */
+      _errorChanged(val) {
+        this.togglePaperInputClass(
+          this.shadowRoot.querySelector('#paperInput'), val, 'error');
+      }
+
+      /**
+      * Fired when `readOnly` changes its value.
+      *
+      * @param {Boolean} val Value changed.
+      */
+      _readOnlyChanged(val) {
+        let pinput = this.shadowRoot.querySelector('#paperInput');
+        pinput.readonly = val;
+        this.togglePaperInputClass(pinput, val, 'readOnly');
+      }
+    }
+
+    window.customElements.define(PredictiveSearcherInput.is, PredictiveSearcherInput);
+  </script>
 </dom-module>
